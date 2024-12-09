@@ -19,7 +19,7 @@ export default function Index() {
     const updateAvailablePositions = () => {
         if (svgPlanRef.current) {
             const placeholders = svgPlanRef.current.getAvailablePlaceholders();
-            setAvailablePositions(placeholders.map((p) => p.name as string));
+            setAvailablePositions(placeholders.map((p: { name: string; }) => p.name as string));
         }
     };
 

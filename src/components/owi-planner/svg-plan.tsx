@@ -222,6 +222,10 @@ const SvgPlan = forwardRef<SvgPlanRef, SvgPlanProps>(({hideUnused}, ref) => {
             });
         };
 
+        const getAvailablePlaceholders = () => {
+            return placeholders.filter((placeholder) => placeholder.number === null && placeholder.name);
+        };
+
         // Expose methods to the parent via the ref
         useImperativeHandle(ref, () => ({
             resetAllPlaceholders() {
@@ -233,6 +237,7 @@ const SvgPlan = forwardRef<SvgPlanRef, SvgPlanProps>(({hideUnused}, ref) => {
                 );
                 setCounter(0);
             },
+            getAvailablePlaceholders, // Provide this method to parent
             logCurrentState() {
                 console.log("Placeholders:", placeholders);
                 console.log("Counter:", counter);

@@ -15,9 +15,20 @@ export interface EventData {
     toEnd: string;
 }
 
+interface ClipboardParserProps {
+    availablePositions: string[];
+}
 
-const ClipboardParser = () => {
+const ClipboardParser: React.FC<ClipboardParserProps> = ({ availablePositions }) => {
     const [parsedData, setParsedData] = useState<EventData[]>([]);
+
+    const handlePositionChange = (rowIndex: number, newPosition: string) => {
+        setParsedData((prevData) =>
+            prevData.map((data, index) =>
+                index === rowIndex ? { ...data, position: newPosition } : data
+            )
+        );
+    };
 
     const handlePasteFromClipboard = async () => {
         try {
@@ -84,7 +95,23 @@ const ClipboardParser = () => {
                         <td className="border border-gray-300 px-4 py-2">{data.date}</td>
                         <td className="border border-gray-300 px-4 py-2">{data.lastName}</td>
                         <td className="border border-gray-300 px-4 py-2">{data.firstName}</td>
-                        <td className="border border-gray-300 px-4 py-2">{data.position}</td>
+                        <td className="border border-gray-300 px-4 py-2">
+                            {data.position || (
+                                <select
+                                    onChange={(e) => handlePositionChange(index, e.target.value)}
+                                    defaultValue=""
+                                >
+                                    <option value="" disabled>
+                                        Select Position
+                                    </option>
+                                    {availablePositions.map((pos, i) => (
+                                        <option key={i} value={pos}>
+                                            {pos}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        </td>
                         <td className="border border-gray-300 px-4 py-2">{data.start}</td>
                         <td className="border border-gray-300 px-4 py-2">{data.end}</td>
                         <td className="border border-gray-300 px-4 py-2">{data.fromStart}</td>

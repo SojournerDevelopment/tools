@@ -20,7 +20,7 @@ export interface SvgPlanRef {
 }
 
 const LOCAL_STORAGE_VERSION_KEY = "svgPlanVersion";
-const LOCAL_STORAGE_VERSION = "0.0.1";
+const LOCAL_STORAGE_VERSION = "0.0.2";
 
 const LOCAL_STORAGE_KEY = "svgPlanPlaceholders";
 
@@ -185,6 +185,9 @@ const SvgPlan = forwardRef<SvgPlanRef, SvgPlanProps>(({hideUnused}, ref) => {
                 {id: 58, cx: 1054, cy: 518, number: null, name: "West Ebene D Sektor 12"},
                 {id: 59, cx: 1054, cy: 600, number: null, name: "West Ebene D Sektor 13"},
 
+                // 2 new positions for Additional positions
+                {id: 75, cx: 708, cy: 624, number: null, name: "Ebene B Nord Mitte"},
+                {id: 76, cx: 708, cy: 687, number: null, name: "Ebene D Nord Mitte"},
 
             ]);
         }
